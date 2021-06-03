@@ -1,8 +1,6 @@
 #include <iostream>
-#include "greet.h"
+#include "checkout.h"
 
 int main() {
-    std::cout << greet("David") << std::endl;
-
     return 0;
 }

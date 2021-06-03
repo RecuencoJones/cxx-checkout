@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(project_name)
+project(checkout)
 add_compile_options(-std=c++11)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
