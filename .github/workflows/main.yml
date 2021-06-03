@@ -1,0 +1,29 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conan
+      run: |
+        curl -sSL -o conan.deb https://github.com/conan-io/conan/releases/latest/download/conan-ubuntu-64.deb
+        sudo dpkg -i conan.deb
+    - name: Setup C++, cmake
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake
+    - name: Create build directory
+      run: mkdir -p build
+    - name: Configure
+      working-directory: build
+      run: |
+        conan install .. -s 'compiler.libcxx=libstdc++11'
+        cmake ..
+    - name: Build and test
+      working-directory: build
+      run: |
+        make all
+        ./bin/test
